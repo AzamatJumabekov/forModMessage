@@ -42,6 +42,6 @@ class Handler
   end
 
   def write_to_file
-    File.open('./output/messages.json', 'a+') { |file| file.write(json)}
+    File.open('messages.json', 'a+') { |file| file.write(json)}
   end
 end
