@@ -1,0 +1,10 @@
+{
+  "CODE": "CODE",
+  "type": "SMS",
+   "name": "Одноразовый пароль",
+   "message": {
+    "ru": "OpenWallet. Код подтверждения - {{code}}. Никому не сообщайте этот код.",
+    "en": "OpenWallet. Confirmation code - {{code}}. Do not share this code.",
+  	"kz": "OpenWallet. Растау коды - {{code}}. Бұл кодты ешкімге айтпаңыз."
+ }
+}

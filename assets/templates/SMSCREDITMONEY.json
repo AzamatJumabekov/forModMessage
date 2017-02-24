@@ -1,0 +1,9 @@
+{
+  "keys": ["date", "account_name", "amount", "alfa_3_code"],
+  "name": "Поступление средств",
+  "message":{
+    "ru": "OpenWallet. {{date}} Пополнение счета {{account_name}}  {{amount}} {{alfa_3_code}}. Остаток {{amount}} {{alfa_3_code}}",
+    "en": "OpenWallet. {{date}} Account {{account_name}}  {{amount}} {{alfa_3_code}} replanishment. Balance {{amount}} {{alfa_3_code}}.",
+    "kz": "OpenWallet. {{date}} Шотты толтыру {{account_name}} {{amount}} {{alfa_3_code}}. Қалдық {{amount}} {{alfa_3_code}}"
+ }
+}

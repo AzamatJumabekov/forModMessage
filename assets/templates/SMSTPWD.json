@@ -1,0 +1,8 @@
+{"TMPPWD": "TMPPWD",
+ "name": "Временный пароль",
+ "message":{
+            "ru": "OpenWallet.  Ваш временный пароль - [TMPPWD]. Смените его после входа в систему.",
+            "en": "OpenWallet. Your temporary password - [TMPPWD].  Please, change it after login.",
+	    "kz": "OpenWallet.  Сіздің уақытша пароліңіз - [TMPPWD]. Жүйеге кіргеннен кейін оны ауыстырыңыз."
+ }
+}
