@@ -21,6 +21,8 @@ class App < Rack::App
   desc 'some hello endpoint'
   post '/hello' do
     'ok'
+    a = Handler.new(payload)
+    a.render
   end
 
 end
@@ -33,7 +35,11 @@ class Handler
   end
 
   def render
-    Mustache.render(read_file(payload[:template])[:message][payload[:lang]], payload)
+    begin
+      Mustache.render(read_file(payload[:template])[:message][payload[:lang]], payload)
+    rescue Mustache::ContextMiss => e
+      puts e
+    end
   end
 
   def read_file(filename)
@@ -43,5 +49,11 @@ class Handler
 
   def write_to_file
     File.open('messages.json', 'a+') { |file| file.write(json)}
+  end
+end
+
+class Mustache
+  def self.raise_on_context_miss?
+    @raise_on_context_miss = true
   end
 end
