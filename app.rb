@@ -27,6 +27,7 @@ class App < Rack::App
 
 end
 
+
 class Handler
   attr_reader :payload
   
@@ -36,9 +37,10 @@ class Handler
 
   def render
     begin
-      Mustache.render(read_file(payload[:template])[:message][payload[:lang]], payload)
+      message_text = Mustache.render(read_file(payload[:template])[:message][payload[:lang]], payload)
+      write_to_file(message_text)
     rescue Mustache::ContextMiss => e
-      puts e
+      e
     end
   end
 
@@ -47,13 +49,30 @@ class Handler
     template = Hash[(JSON.parse(file)).map{|k,v| [k.to_sym,v]}]
   end
 
-  def write_to_file
-    File.open('messages.json', 'a+') { |file| file.write(json)}
+  def write_to_file(message)
+    File.open('messages.json', 'a+') { |file| file.write(message + ', ')}
   end
 end
 
 class Mustache
   def self.raise_on_context_miss?
     @raise_on_context_miss = true
+  end
+
+  class Context
+    def fetch(name, default = :__raise)
+      @stack.each do |frame|
+        next if frame == self
+
+        value = find(frame, name, :__missing)
+        return value if :__missing != value
+      end
+
+      if default == :__raise || mustache_in_stack.raise_on_context_miss?
+        raise ContextMiss.new("Can't find #{name}")
+      else
+        default
+      end
+    end
   end
 end
