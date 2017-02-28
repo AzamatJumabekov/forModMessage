@@ -1,4 +1,4 @@
 <h1>Arhitector</h1>
 <% @templates.each do |template| %>
-  <p><%= template %></p>
+  <p><%= template %> <a href="/delete/<%= template %>">delete</a></p>
 <% end %>

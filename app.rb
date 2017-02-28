@@ -34,8 +34,8 @@ class App < Rack::App
     'ok'
   end 
 
-  post '/delete' do
-    template = AdminTemplate.new(payload)
+  get '/delete/:filename' do
+    template = AdminTemplate.new(params['filename'])
     template.delete
   end
 
@@ -106,7 +106,7 @@ class AdminTemplate
   end
 
   def delete
-    File.delete("./assets/templates/" + @params['name'] + ".json")
+    File.delete("./assets/templates/" + @params)
   end
 
   def update
@@ -114,7 +114,7 @@ class AdminTemplate
 
   def write_to_file
     json_attributes = JSON.generate(@params['template_attributes'])
-    File.open("./assets/templates/" + @params['name'] + ".json", "w+") { |file| file.write(json_attributes) }
+    File.open("./assets/templates/" + @params['name'], "w+") { |file| file.write(json_attributes) }
   end
 
   def edit
