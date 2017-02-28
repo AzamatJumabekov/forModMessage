@@ -44,6 +44,16 @@ class App < Rack::App
     render 'index.html.erb'
   end
 
+  get '/new' do
+    render 'new.html.erb'
+  end
+
+  post '/create' do
+    new_template = AdminTemplate.new(payload)
+    new_template.write_to_file
+    redirect_to '/index'
+  end
+
 end
 
 
