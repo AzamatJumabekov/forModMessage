@@ -37,6 +37,7 @@ class App < Rack::App
   get '/delete/:filename' do
     template = AdminTemplate.new(params['filename'])
     template.delete
+    redirect_to '/index'
   end
 
   get '/index' do
@@ -52,6 +53,13 @@ class App < Rack::App
     new_template = AdminTemplate.new(payload)
     new_template.write_to_file
     redirect_to '/index'
+  end
+
+  get '/show/:template' do
+    file = AdminTemplate.new(params)
+    @file = file.show
+    @file_name = params['template']
+    render 'show.html.erb'
   end
 
 end
@@ -115,6 +123,10 @@ class AdminTemplate
   def new
   end
 
+  def show
+    file = File.read('./assets/templates/' + @params['template'])
+  end
+
   def delete
     File.delete("./assets/templates/" + @params)
   end
@@ -123,8 +135,7 @@ class AdminTemplate
   end
 
   def write_to_file
-    json_attributes = JSON.generate(@params['template_attributes'])
-    File.open("./assets/templates/" + @params['name'], "w+") { |file| file.write(json_attributes) }
+    File.open("./assets/templates/" + @params['name'], "w+") { |file| file.write(@params['template_attributes']) }
   end
 
   def edit
