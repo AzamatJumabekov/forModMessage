@@ -1,4 +1,5 @@
 class App < Rack::App
+  apply_extensions :front_end
 
   serializer do |obj|
     if obj.is_a?(String)
@@ -18,11 +19,29 @@ class App < Rack::App
     end
   end
 
+  layout "layout.html.erb"
+
   desc 'some hello endpoint'
   post '/hello' do
     'ok'
     a = Handler.new(payload)
     a.render
+  end
+
+  post '/admin' do
+    file = AdminTemplate.new(payload)
+    file.write_to_file
+    'ok'
+  end 
+
+  post '/delete' do
+    template = AdminTemplate.new(payload)
+    template.delete
+  end
+
+  get '/index' do
+    @templates = Dir[ './assets/templates/*' ].select{ |f| File.file? f }.map{ |f| File.basename f }
+    render 'index.html.erb'
   end
 
 end
@@ -76,3 +95,29 @@ class Mustache
     end
   end
 end
+
+class AdminTemplate
+  
+  def initialize(params)
+    @params = params
+  end
+
+  def new
+  end
+
+  def delete
+    File.delete("./assets/templates/" + @params['name'] + ".json")
+  end
+
+  def update
+  end
+
+  def write_to_file
+    json_attributes = JSON.generate(@params['template_attributes'])
+    File.open("./assets/templates/" + @params['name'] + ".json", "w+") { |file| file.write(json_attributes) }
+  end
+
+  def edit
+  end
+
+end 
