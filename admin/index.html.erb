@@ -1,8 +1,19 @@
-<h1>Arhitector</h1>
-<% @templates.each do |template| %>
-  <p><%= template %> 
-    <a href="/admin/delete/<%= template %>">delete</a>
-    <a href="/admin/show/<%= template %>">show</a>
-    <a href="/admin/edit/<%= template %>">edit</a>
-  </p>
+<h1>Templates index</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Template name</th>
+    <th>Actions</th>
+  </tr>
+  <% @templates.each do |template| %>
+  <tr>
+    <td> <%= template %> </td>
+    <td>
+      <a href="/admin/delete/<%= template %>" class="glyphicon glyphicon-remove" onclick="return confirm('Are you sure?')"></a>
+      <a href="/admin/show/<%= template %>" class="glyphicon glyphicon-search")></a>
+      <a href="/admin/edit/<%= template %>" class="glyphicon glyphicon-pencil"></a>
+    </td>
+  </tr>
+  
 <% end %>
+</table>

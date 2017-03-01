@@ -4,6 +4,8 @@ class Admin < Rack::App
 
   layout "layout.html.erb"
 
+  serve_files_from '/www'
+
   payload do
     parser do
       accept :json, :www_form_urlencoded
