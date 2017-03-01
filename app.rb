@@ -69,48 +69,30 @@ class Handler
   attr_reader :payload
   
   def initialize(payload)
-    @payload = Hash[payload.map{|(k,v)| [k.to_sym,v]}]
+    @payload = payload
   end
 
   def render
-    begin
-      message_text = Mustache.render(read_file(payload[:template])[:message][payload[:lang]], payload)
-      write_to_file(message_text)
-    rescue Mustache::ContextMiss => e
-      e
-    end
+    Liquid::Template.error_mode = :strict
+    text = read_file(payload['template'])['message'][payload['lang']]
+    template = Liquid::Template.parse(text)
+    message_text = template.render(payload, strict_variables: true)
+    write_to_file(message_text)
+    raise LiquidTemplateMissing.new(template.errors) if template.errors.any?
+    'ok'
   end
 
   def read_file(filename)
-    file = File.read('./assets/templates/' + filename + '.json')
-    template = Hash[(JSON.parse(file)).map{|k,v| [k.to_sym,v]}]
+    file = JSON.parse(File.read('./assets/templates/' + filename))
   end
 
   def write_to_file(message)
     File.open('messages.json', 'a+') { |file| file.write(message + ', ')}
   end
-end
 
-class Mustache
-  def self.raise_on_context_miss?
-    @raise_on_context_miss = true
-  end
+  def generate_json
+    message = {}
 
-  class Context
-    def fetch(name, default = :__raise)
-      @stack.each do |frame|
-        next if frame == self
-
-        value = find(frame, name, :__missing)
-        return value if :__missing != value
-      end
-
-      if default == :__raise || mustache_in_stack.raise_on_context_miss?
-        raise ContextMiss.new("Can't find #{name}")
-      else
-        default
-      end
-    end
   end
 end
 
@@ -142,3 +124,15 @@ class AdminTemplate
   end
 
 end 
+
+class LiquidTemplateMissing < StandardError
+  def initialize params
+    @params = params
+  end
+
+  def message
+    error = (@params.map { |e| e.message[/Liquid error: undefined variable (.+)/, 1] }).uniq
+    message = ['code': 'params_missing', 'params': error ]
+    return message
+  end
+end

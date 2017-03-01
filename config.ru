@@ -1,6 +1,6 @@
 require 'rack/app'
 require 'pry'
-require 'mustache'
+require 'liquid'
 require 'rack/app/front_end'
 
 require_relative 'app'
