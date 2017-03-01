@@ -2,8 +2,6 @@ class App < Rack::App
 
   apply_extensions :front_end
 
-  layout "layout.html.erb"
-
   serializer do |obj|
     if obj.is_a?(String)
       obj

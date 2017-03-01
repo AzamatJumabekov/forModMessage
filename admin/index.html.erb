@@ -1,8 +1,8 @@
 <h1>Arhitector</h1>
 <% @templates.each do |template| %>
   <p><%= template %> 
-    <a href="/delete/<%= template %>">delete</a>
-    <a href="/show/<%= template %>">show</a>
-    <a href="/edit/<%= template %>">edit</a>
+    <a href="/admin/delete/<%= template %>">delete</a>
+    <a href="/admin/show/<%= template %>">show</a>
+    <a href="/admin/edit/<%= template %>">edit</a>
   </p>
 <% end %>

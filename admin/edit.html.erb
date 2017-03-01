@@ -1,5 +1,5 @@
 <h1>edit template</h1>
-<form action="/update" method="post" accept-charset="UTF-8">
+<form action="/admin/update" method="post" accept-charset="UTF-8">
   Template_name:<br>
   <input type="text" name="name" value="<%= @file_name %>"><br>
   <input type="hidden" name="old_name" value="<%= @file_name %>">
@@ -7,4 +7,4 @@
   <textarea name="template_attributes" rows="10" cols="30"><%= @file %></textarea><br><br>
   <input type="submit" value="save">
 </form>
-<a href="/index">cancel</a>
+<a href="/admin/index">cancel</a>

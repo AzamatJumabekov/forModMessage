@@ -1,5 +1,15 @@
-class Admin < App
-  
+class Admin < Rack::App
+
+  apply_extensions :front_end
+
+  layout "layout.html.erb"
+
+  payload do
+    parser do
+      accept :json, :www_form_urlencoded
+    end
+  end
+
   post '/admin' do
     file = AdminTemplate.new(payload)
     file.write_to_file
@@ -9,7 +19,7 @@ class Admin < App
   get '/delete/:filename' do
     template = AdminTemplate.new(params['filename'])
     template.delete
-    redirect_to '/index'
+    redirect_to '/admin/index'
   end
 
   get '/index' do
@@ -24,7 +34,7 @@ class Admin < App
   post '/create' do
     new_template = AdminTemplate.new(payload)
     new_template.write_to_file
-    redirect_to '/index'
+    redirect_to '/admin/index'
   end
 
   get '/show/:template' do
@@ -44,7 +54,7 @@ class Admin < App
   post '/update' do
     edited_file = AdminTemplate.new(payload)
     edited_file.update
-    redirect_to '/index'
+    redirect_to '/admin/index'
   end
 end
 
