@@ -3,6 +3,7 @@ require 'pry'
 require 'liquid'
 require 'rack/app/front_end'
 
+require_relative 'hash'
 require_relative 'app'
 require_relative 'admin'
 

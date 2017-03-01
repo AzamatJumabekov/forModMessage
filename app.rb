@@ -24,7 +24,7 @@ class App < Rack::App
   post '/hello' do
     'ok'
     a = Handler.new(payload)
-    a.render
+    a.template_render
   end
 end
 
