@@ -62,6 +62,19 @@ class App < Rack::App
     render 'show.html.erb'
   end
 
+  get '/edit/:template' do
+    file = AdminTemplate.new(params)
+    @file = file.show
+    @file_name = params['template']
+    render 'edit.html.erb'
+  end
+
+  post '/update' do
+    edited_file = AdminTemplate.new(payload)
+    edited_file.update
+    redirect_to '/index'
+  end
+
 end
 
 
@@ -102,9 +115,6 @@ class AdminTemplate
     @params = params
   end
 
-  def new
-  end
-
   def show
     file = File.read('./assets/templates/' + @params['template'])
   end
@@ -114,6 +124,10 @@ class AdminTemplate
   end
 
   def update
+    if @params['old_name'] != @params['name']
+      File.rename("./assets/templates/" + @params['old_name'], "./assets/templates/" + @params['name'])
+    end
+    write_to_file
   end
 
   def write_to_file
@@ -121,6 +135,7 @@ class AdminTemplate
   end
 
   def edit
+    file = File.read('./assets/templates/' + @params['template'])
   end
 
 end 
