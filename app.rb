@@ -85,8 +85,10 @@ class Handler
     @payload = payload
   end
 
-  def render
-    Liquid::Template.error_mode = :strict
+  def template_render
+    Liquid::Template.error_mode = :warn
+    keys = %w{ template lang }
+    raise AttributesMissing.new if (keys - payload.keys).any?
     text = read_file(payload['template'])['message'][payload['lang']]
     template = Liquid::Template.parse(text)
     message_text = template.render(payload, strict_variables: true)
@@ -101,11 +103,6 @@ class Handler
 
   def write_to_file(message)
     File.open('messages.json', 'a+') { |file| file.write(message + ', ')}
-  end
-
-  def generate_json
-    message = {}
-
   end
 end
 
@@ -138,7 +135,13 @@ class AdminTemplate
     file = File.read('./assets/templates/' + @params['template'])
   end
 
-end 
+end
+
+class AttributesMissing < StandardError
+  def message
+    ['code': 'no template name', 'params': 'template or lang not passed' ]    
+  end
+end
 
 class LiquidTemplateMissing < StandardError
   def initialize params
