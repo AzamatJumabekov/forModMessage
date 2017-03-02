@@ -1,18 +1,20 @@
 <h1><%= @file_name %></h1>
 
-<pre id="json"><%= @file %></pre>
+<pre id="json"></pre>
 
 <script>
-  var data = {
-    "data": {
-        "x": "1",
-        "y": "1",
-        "url": "http://url.com"
-    },
-    "event": "start",
-    "show": 1,
-    "id": 50
-}
+  function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+  }
+
+  var data = <%= @file %>
+
+  IsJsonString(data);
 
 
 document.getElementById("json").innerHTML = JSON.stringify(data, undefined, 2);
