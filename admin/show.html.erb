@@ -3,19 +3,8 @@
 <pre id="json"></pre>
 
 <script>
-  function IsJsonString(str) {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
-  }
 
-  var data = <%= @file %>
-
-  IsJsonString(data);
-
+  var data = <%= @file %>;
 
 document.getElementById("json").innerHTML = JSON.stringify(data, undefined, 2);
 </script>
