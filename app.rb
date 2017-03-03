@@ -20,23 +20,18 @@ class App < Rack::App
     end
   end
 
-  desc 'some hello endpoint'
-  post '/hello' do
-    'ok'
-    a = Messenger.new(payload)
-    a.template_render
-  end
+  desc 'handles requests for creating messages'
 
   get '/generate' do
-    something = Messenger.new(payload)
-    something.generate_message
+    something = Message.new(payload)
+    something.template_render
     'ok'
   end
 
 end
 
 
-class Messenger
+class Message
   attr_reader :payload
   
   def initialize(payload)
@@ -47,12 +42,13 @@ class Messenger
     Liquid::Template.error_mode = :warn
     keys = %w{ template lang }
     raise AttributesMissing.new if (keys - payload.keys).any?
-    text = read_file(payload['template'])['message'][payload['lang']]
+    text = read_file(payload['template'])['message']
     template = Liquid::Template.parse(text)
     message_text = template.render(payload, strict_variables: true)
     write_to_file(message_text)
     raise LiquidTemplateMissing.new(template.errors) if template.errors.any?
     'ok'
+    binding.pry
   end
 
   def read_file(filename)
