@@ -22,9 +22,9 @@ class App < Rack::App
 
   desc 'handles requests for creating messages'
 
-  get '/generate' do
+  post '/generate' do
     something = Message.new(payload)
-    something.template_render
+    something.generate_message
     'ok'
   end
 
@@ -40,15 +40,13 @@ class Message
 
   def template_render
     Liquid::Template.error_mode = :warn
-    keys = %w{ template lang }
-    raise AttributesMissing.new if (keys - payload.keys).any?
+    keys = %w{ template }
+    raise AttributesMissing.new if (['template'] - payload.keys).any?
     text = read_file(payload['template'])['message']
     template = Liquid::Template.parse(text)
-    message_text = template.render(payload, strict_variables: true)
-    write_to_file(message_text)
+    message_text = template.render(payload['params'], strict_variables: true)
     raise LiquidTemplateMissing.new(template.errors) if template.errors.any?
-    'ok'
-    binding.pry
+    return message_text
   end
 
   def read_file(filename)
@@ -74,22 +72,22 @@ class Message
   end
 
   def email_message
-    message = {
+    new_message = {
       'type' => 'email',
       'email' => payload['to'],
       'message' => {
         'subject' => payload['subject'],
-        'body' => 'text/plain',
-        'body_html' => '<h1>Hello, there!</h1>'
+        'body' => template_render,
+        'body_html' => '<h1>' + template_render + '</h1>'
       }
     }
   end
 
   def sms_message
-    message = {
+    new_message = {
       'type' => 'sms',
       'phone_number' => payload['to'],
-      'message' => 'message'
+      'message' => template_render
     }
   end
 
