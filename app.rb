@@ -23,13 +23,20 @@ class App < Rack::App
   desc 'some hello endpoint'
   post '/hello' do
     'ok'
-    a = Handler.new(payload)
+    a = Messenger.new(payload)
     a.template_render
   end
+
+  get '/generate' do
+    something = Messenger.new(payload)
+    something.generate_message
+    'ok'
+  end
+
 end
 
 
-class Handler
+class Messenger
   attr_reader :payload
   
   def initialize(payload)
@@ -55,6 +62,41 @@ class Handler
   def write_to_file(message)
     File.open('messages.json', 'a+') { |file| file.write(message + ', ')}
   end
+
+  def generate_message
+    message = {}
+
+    if payload['template'].include? 'SMS'
+      message.merge!(sms_message)
+    elsif payload['template'].include? 'EMAIL'
+      message.merge!(email_message)
+    end
+
+    json = JSON.pretty_generate(message)
+    write_to_file(json)
+    
+  end
+
+  def email_message
+    message = {
+      'type' => 'email',
+      'email' => payload['to'],
+      'message' => {
+        'subject' => payload['subject'],
+        'body' => 'text/plain',
+        'body_html' => '<h1>Hello, there!</h1>'
+      }
+    }
+  end
+
+  def sms_message
+    message = {
+      'type' => 'sms',
+      'phone_number' => payload['to'],
+      'message' => 'message'
+    }
+  end
+
 end
 
 class AttributesMissing < StandardError

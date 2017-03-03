@@ -22,6 +22,7 @@ class Admin < Rack::App
     template = AdminTemplate.new(params['filename'])
     template.delete
     redirect_to '/admin/index'
+
   end
 
   get '/index' do
@@ -58,6 +59,7 @@ class Admin < Rack::App
     edited_file.update
     redirect_to '/admin/index'
   end
+
 end
 
 class AdminTemplate
@@ -71,6 +73,7 @@ class AdminTemplate
   end
 
   def delete
+
     File.delete("./assets/templates/" + @params)
   end
 
