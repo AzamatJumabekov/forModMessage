@@ -4,6 +4,8 @@ require 'liquid'
 require 'rack/app/front_end'
 require 'rack/static'
 
+require_relative 'extra/admin_template'
+require_relative 'extra/message'
 require_relative 'hash'
 require_relative 'app'
 require_relative 'admin'

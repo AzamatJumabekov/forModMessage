@@ -18,11 +18,10 @@ class Admin < Rack::App
     'ok'
   end 
 
-  get '/delete/:filename' do
-    template = AdminTemplate.new(params['filename'])
+  post '/delete' do
+    template = AdminTemplate.new(payload['filename'])
     template.delete
     redirect_to '/admin/index'
-
   end
 
   get '/index' do
@@ -58,38 +57,6 @@ class Admin < Rack::App
     edited_file = AdminTemplate.new(payload)
     edited_file.update
     redirect_to '/admin/index'
-  end
-
-end
-
-class AdminTemplate
-  
-  def initialize(params)
-    @params = params
-  end
-
-  def show
-    file = File.read('./assets/templates/' + @params['template'])
-  end
-
-  def delete
-
-    File.delete("./assets/templates/" + @params)
-  end
-
-  def update
-    if @params['old_name'] != @params['name']
-      File.rename("./assets/templates/" + @params['old_name'], "./assets/templates/" + @params['name'])
-    end
-    write_to_file
-  end
-
-  def write_to_file
-    File.open("./assets/templates/" + @params['name'], "w+") { |file| file.write(@params['template_attributes']) }
-  end
-
-  def edit
-    file = File.read('./assets/templates/' + @params['template'])
   end
 
 end
