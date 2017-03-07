@@ -23,6 +23,7 @@ class App < Rack::App
   desc 'handles requests for creating messages'
 
   post '/generate' do
+    binding.pry
     if payload.nil?
       raise StandardError.new("nil params")
     end
