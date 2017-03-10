@@ -12,5 +12,8 @@ group :development do
 end
 
 group :test do
+  gem 'rack-test'
+  gem 'capybara'
   gem 'rspec', '~> 3.4'
+  gem 'selenium-webdriver'
 end

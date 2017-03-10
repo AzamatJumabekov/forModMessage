@@ -1,4 +1,3 @@
-require 'spec_helper'
 RSpec.describe Message do
   it 'should return rendered text from template' do
     payload = {"template" => "SMSOTP_ru", "to" => "+95745732234", "params" => {"code" => "4353"}}

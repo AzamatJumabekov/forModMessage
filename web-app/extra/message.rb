@@ -17,8 +17,7 @@ class Message
   end
 
   def read_file(filename)
-    path = File.expand_path('../../assets/templates/', __FILE__)
-    file = JSON.parse(File.read(File.join(path, filename)))
+    file = JSON.parse(File.read('./assets/templates/' + filename))
   end
 
   def write_to_file(message)
