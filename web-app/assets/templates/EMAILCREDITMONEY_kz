@@ -1,0 +1,3 @@
+{
+  "message": "Здравствуйте! На ваш счет {{account_name}} {{date}} зачислено: [СУММА] [ALFA_3 ВАЛЮТЫ ОПЕРАЦИИ]. Остаток на счете {{balance}} {{account_currency_alfa3}}"
+}

@@ -4,7 +4,7 @@ class Admin < Rack::App
 
   layout "layout.html.erb"
 
-  serve_files_from '/www'
+  serve_files_from '/app/www'
 
   payload do
     parser do

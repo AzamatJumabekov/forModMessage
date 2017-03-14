@@ -1,9 +1,9 @@
 FROM ruby:2.3.1-alpine
 
 # Install base packages
-RUN apk update --no-cache
-RUN apk upgrade --no-cache
-RUN apk add alpine-sdk --no-cache
+RUN apk update
+RUN apk upgrade
+RUN apk add alpine-sdk
 
 RUN gem install bundler --version 1.14.5 --no-ri
 
