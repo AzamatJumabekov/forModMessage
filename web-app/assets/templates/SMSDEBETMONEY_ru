@@ -1,3 +1,0 @@
-{
-  "message": "OpenWallet. {{date}} Списание со счета {{account_name}}  {{amount}} {{operation_currency_alfa3}}. Остаток  {{balance}} {{account_currency_alfa3}}"
-}

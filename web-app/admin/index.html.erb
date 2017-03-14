@@ -1,4 +1,4 @@
-<h1>Templates index</h1>
+<h1>Шаблоны</h1>
 
 <table class="table table-striped">
   <tr>
@@ -6,17 +6,16 @@
     <th>Actions</th>
   </tr>
   <% @templates.each do |template| %>
-  <tr>
-    <td> <%= template %> </td>
-    <td>
-      <form action="/admin/delete" method="post">
-        <input type="hidden" name="filename" value="<%= template %>">
-        <button class="glyphicon glyphicon-remove" onclick="return confirm('Are you sure?')"></button>
-      </form>
-      <a href="/admin/show/<%= template %>" class="glyphicon glyphicon-search")></a>
-      <a href="/admin/edit/<%= template %>" class="glyphicon glyphicon-pencil"></a>
-    </td>
-  </tr>
-  
-<% end %>
+    <tr>
+      <td> <%= template %> </td>
+      <td>
+        <form action="/admin/delete" method="post">
+          <input type="hidden" name="filename" value="<%= template %>">
+          <button class="glyphicon glyphicon-remove" onclick="return confirm('Are you sure?')">Удалить</button>
+        </form>
+        <button onclick="window.location.href='/admin/show/<%= template %>'" class="button glyphicon glyphicon-search">Просмотр</button>
+        <button onclick="window.location.href='/admin/edit/<%= template %>'" class="button glyphicon glyphicon-pencil">Изменить</button>
+      </td>
+    </tr>
+  <% end %>
 </table>

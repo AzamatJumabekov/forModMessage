@@ -1,10 +1,10 @@
-<h1>edit template</h1>
+<h1>Редактирование шаблона</h1>
 <form action="/admin/update" method="post" accept-charset="UTF-8">
   Template_name:<br>
   <input type="text" class="form-control" name="name" value="<%= @file_name %>"><br>
   <input type="hidden" name="old_name" value="<%= @file_name %>">
   Body:<br>
   <textarea class="form-control" name="template_attributes" rows="10"><%= @file %></textarea><br><br>
-  <input type="submit" value="save" class="btn btn-default">
+  <input type="submit" value="Сохранить" class="btn btn-default">
 </form>
 <a href="/admin/index" class="btn btn-default">cancel</a>
