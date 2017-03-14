@@ -3,8 +3,9 @@ When(/^Я на главной странице админки$/) do
 end
 
 Then(/^Я вижу "([^"]*)"$/) do |arg|
-  sleep 1
+  sleep 2
   expect(page).to have_content(arg)
+  sleep 2
 end
 
 When(/^Я нажимаю на "([^"]*)"$/) do |arg|
@@ -21,9 +22,9 @@ end
 
 
 When(/^Я перехожу по xpath по названию "([^"]*)" на "([^"]*)"$/) do |arg, link|
-  sleep 1
+  sleep 2
   find('tr', text: arg).click_on(link)
-  sleep 1
+  sleep 2
 end
 
 When(/^Я не вижу "([^"]*)"$/) do |arg|
