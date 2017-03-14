@@ -1,0 +1,8 @@
+web:
+  build: ./web-app/
+  restart: "always"
+  command: "puma -p 3000 /app/config.ru"
+  ports:
+    - "3000:3000"
+  volumes:
+    - "./templates/:/app/assets/templates"
