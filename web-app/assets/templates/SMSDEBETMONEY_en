@@ -1,0 +1,3 @@
+{
+  "message": "OpenWallet. {{date}} Charge-off from {{account_name}}  {{amount}} {{operation_currency_alfa3}}. Balance {{balance}} {{account_currency_alfa3}}."
+}
