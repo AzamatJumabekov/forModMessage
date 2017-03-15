@@ -7,8 +7,10 @@ class Sender
   templates = Dir[ '../templates/*' ].select{ |f| File.file? f }.map{ |f| File.basename f }
   LIST = %w(template to params).push(*templates).sort
 
+  def initialize
+    @uri = URI.parse("http://192.168.1.103:9393/generate")
+  end
   def sender_params
-    uri = URI.parse("http://192.168.1.103:9393/generate")
     header = {'Content-Type' => 'application/json'}
     Net::HTTP::Post.new(@uri.request_uri, header)
   end
