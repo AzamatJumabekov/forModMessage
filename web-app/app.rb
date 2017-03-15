@@ -33,7 +33,6 @@ class App < Rack::App
     end
     message = Message.new(hash)
     message.generate_message
-    'ok'
   end
 
 end

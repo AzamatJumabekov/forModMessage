@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require_relative 'sender'
+require 'pry'
 
 class App
   TEMPLATES = Dir[ '../templates/*' ].select{ |f| File.file? f }.map{ |f| File.basename f }
@@ -12,7 +13,8 @@ class App
     loop do
       puts "> Enter params".cyan
       while line = Readline.readline('> '.cyan, true)
-          Sender.send(line)  
+          request = Sender.new
+          request.send(line)
       end
     end
   end
