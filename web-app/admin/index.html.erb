@@ -11,10 +11,10 @@
       <td>
         <form action="/admin/delete" method="post">
           <input type="hidden" name="filename" value="<%= template %>">
-          <button class="glyphicon glyphicon-remove" onclick="return confirm('Are you sure?')">Удалить</button>
+          <button onclick="return confirm('Are you sure?')">Удалить</button>
         </form>
-        <button onclick="window.location.href='/admin/show/<%= template %>'" class="button glyphicon glyphicon-search">Просмотр</button>
-        <button onclick="window.location.href='/admin/edit/<%= template %>'" class="button glyphicon glyphicon-pencil">Изменить</button>
+        <button onclick="window.location.href='/admin/show/<%= template %>'">Просмотр</button>
+        <button onclick="window.location.href='/admin/edit/<%= template %>'">Изменить</button>
       </td>
     </tr>
   <% end %>
