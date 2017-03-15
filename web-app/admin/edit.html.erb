@@ -1,10 +1,44 @@
 <h1>Редактирование шаблона</h1>
 <form action="/admin/update" method="post" accept-charset="UTF-8">
   Template_name:<br>
-  <input type="text" class="form-control" name="name" value="<%= @file_name %>"><br>
+  <input type="text" class="form-control" name="name" value="<%= @file_name.split('_')[1] %>"><br>
   <input type="hidden" name="old_name" value="<%= @file_name %>">
+  Язык:
+  <div class="radio">
+    <label>
+      <input type="radio" name="lang" id="lang1" value="EN">
+        EN
+    </label>
+    <label>
+      <input type="radio" name="lang" id="lang2" value="RU">
+        RU
+    </label>
+    <label>
+      <input type="radio" name="lang" id="lang3" value="KZ">
+        KZ
+    </label>
+  </div>
+  Тип шаблона:
+  <select class="form-control" name="template_type" id="template_type">
+    <option value="EMAIL">EMAIL</option>
+    <option value="SMS">SMS</option>
+  </select>
   Body:<br>
   <textarea class="form-control" name="template_attributes" rows="10"><%= @file %></textarea><br><br>
   <input type="submit" value="Сохранить" class="btn btn-default">
 </form>
 <a href="/admin/index" class="btn btn-default">cancel</a>
+
+<script>
+  $(function() {
+    var radios = $('input:radio[name=lang]');
+    if(radios.is(':checked') === false) {
+        radios.filter('[value=<%= @file_name.split('_')[2] %>]').prop('checked', true);
+    }
+  });
+
+  $(function() {
+    var selected="<%= @file_name.split('_')[0] %>"; 
+    $("#template_type").val(selected);
+  });
+</script>

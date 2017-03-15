@@ -1,3 +1,0 @@
-{
-  "message": "Сәлеметсіз бе! Сіздің шотыңызға {{account_name}} {{date}}  {{amount}} {{operation_currency_alfa3}}  аударылды. Шоттағы қалдық {{balance}} {{account_currency_alfa3}}"
-}

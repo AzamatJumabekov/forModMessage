@@ -4,7 +4,7 @@ class Admin < Rack::App
 
   layout "layout.html.erb"
 
-  serve_files_from '/app/www'
+  serve_files_from '/www'
 
   payload do
     parser do
@@ -35,7 +35,7 @@ class Admin < Rack::App
 
   post '/create' do
     new_template = AdminTemplate.new(payload)
-    new_template.write_to_file
+    new_template.create
     redirect_to '/admin/index'
   end
 

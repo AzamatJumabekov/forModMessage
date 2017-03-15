@@ -12,12 +12,20 @@ When(/^Я нажимаю на "([^"]*)"$/) do |arg|
   click_link(arg)
 end
 
+When(/^выбираю язык "([^"]*)"$/) do |radio|
+  choose(radio)
+end
+
+When(/^выбираю тип шаблона "([^"]*)"$/) do |arg1|
+  select('SMS', from: 'template_type')
+end
+
 When(/^Я заполняю поле "([^"]*)" текстом "([^"]*)"$/) do |field, value|
   fill_in field, with:value
 end
 
-When(/^Я нажимаю на  кнопку "([^"]*)"$/) do |arg|
-  click_button(arg)
+When(/^Я нажимаю на кнопку "([^"]*)"$/) do |arg|
+  click_on(arg)
 end
 
 

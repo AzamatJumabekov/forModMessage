@@ -2,9 +2,29 @@
 <form action="/admin/create" method="post" accept-charset="UTF-8">
   Наименование шаблона:<br>
   <input type="text" class="form-control" name="name" value=""><br>
+  Язык:
+  <div class="radio">
+    <label>
+      <input type="radio" name="lang" id="lang1" value="EN" checked>
+        EN
+    </label>
+    <label>
+      <input type="radio" name="lang" id="lang2" value="RU">
+        RU
+    </label>
+    <label>
+      <input type="radio" name="lang" id="lang3" value="KZ">
+        KZ
+    </label>
+  </div>
+  Тип шаблона:
+  <select class="form-control" name="template_type">
+    <option>EMAIL</option>
+    <option>SMS</option>
+  </select>
   Содержание шаблона:<br>
-  <textarea class="form-control" name="template_attributes" rows="10"></textarea><br><br>
-  <input type="submit" class="btn btn-default" value="Сохранить">
+  <textarea class="form-control" name="template_attributes" rows="4"></textarea><br><br>
+  <button type="submit" class="btn btn-default">Сохранить</button>
 </form>
 
 <a href="/admin/index" class="btn btn-default">cancel</a>
