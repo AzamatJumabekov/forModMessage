@@ -9,6 +9,3 @@ RUN mkdir /app
 WORKDIR /app
 
 ADD messenger.rb /app
-
-
-ENTRYPOINT ["./messenger.rb"]

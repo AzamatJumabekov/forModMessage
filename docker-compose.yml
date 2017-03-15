@@ -6,3 +6,9 @@ web:
     - "3000:3000"
   volumes:
     - "./templates/:/app/assets/templates"
+console:
+  build: ./console-app/
+  restart: "always"
+  command: ["ping", "vk.com"]
+  volumes:
+    - "./templates/:/templates"
