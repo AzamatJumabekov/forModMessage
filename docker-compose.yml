@@ -1,14 +1,23 @@
-web:
-  build: ./web-app/
-  restart: "always"
-  command: "puma -p 3000 /app/config.ru"
-  ports:
-    - "3000:3000"
-  volumes:
-    - "./templates/:/app/assets/templates"
-console:
-  build: ./console-app/
-  restart: "always"
-  command: ["ping", "vk.com"]
-  volumes:
-    - "./templates/:/templates"
+version: "2"
+
+services:
+  web:
+    build: ./web-app/
+    networks:
+      - "same"
+    restart: "always"
+    command: "puma -p 3000 /app/config.ru"
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./templates/:/app/assets/templates"
+  console:
+    build: ./console-app/
+    networks:
+      - "same"
+    restart: "always"
+    command: ["ping", "vk.com"]
+    volumes:
+      - "./templates/:/templates"
+networks:
+  same: 

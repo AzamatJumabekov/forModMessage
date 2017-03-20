@@ -15,7 +15,7 @@ class Sender
   end
 
   def send(line)
-    uri = URI.parse("http://localhost:9393/generate")
+    uri = URI.parse("http://formodmessage_web_1:3000/generate")
     header = {'Content-Type' => 'application/json'}
     request = Net::HTTP::Post.new(uri.request_uri, header)
     request.body = line
