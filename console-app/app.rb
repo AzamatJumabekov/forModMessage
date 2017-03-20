@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require_relative 'sender'
-require 'pry'
 
 class App
   TEMPLATES = Dir[ '../templates/*' ].select{ |f| File.file? f }.map{ |f| File.basename f }

@@ -8,4 +8,4 @@ RUN mkdir /app
 
 WORKDIR /app
 
-ADD app.rb /app
+ADD ./ /app

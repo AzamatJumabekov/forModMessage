@@ -1,7 +1,7 @@
 require_relative 'string'
 require 'net/http'
 require 'readline'
-require 'pry'
+
 class Sender
 
   def show_wait_cursor(seconds,fps=10)
