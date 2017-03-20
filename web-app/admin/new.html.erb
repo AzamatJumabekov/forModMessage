@@ -1,37 +1,81 @@
 <h1>Форма создания шаблона</h1>
 <form action="/admin/create" method="post" accept-charset="UTF-8">
-  Наименование шаблона:<br>
-  <input type="text" class="form-control" name="name" value=""><br>
-  Язык:
-  <div class="radio">
-    <label>
-      <input type="radio" name="lang" id="lang1" value="EN" checked>
-        EN
-    </label>
-    <label>
-      <input type="radio" name="lang" id="lang2" value="RU">
-        RU
-    </label>
-    <label>
-      <input type="radio" name="lang" id="lang3" value="KZ">
-        KZ
-    </label>
+  Наименование шаблона:
+  <input type="text" class="form-control" name="name" value="">
+  <div class="container">
+    <div class="col-xs-3">
+      Язык:
+      <fieldset name="lang">
+        <div class="radio">
+        <label>
+          <input type="radio" name="lang" id="lang1" value="EN" checked>
+            EN
+        </label>
+        <label>
+          <input type="radio" name="lang" id="lang2" value="RU">
+            RU
+        </label>
+        <label>
+          <input type="radio" name="lang" id="lang3" value="KZ">
+            KZ
+        </label>
+      </div>
+      </fieldset>
+    </div>
+    <div class="col-xs-3">
+      <fieldset name="template_type">
+        Тип шаблона:
+        <div class="radio">
+          <label>
+            <input type="radio" name="template_type" id="lang1" value="EN" checked>
+              EMAIL
+          </label>
+          <label>
+            <input type="radio" name="template_type" id="lang1" value="EN">
+              SMS
+          </label>
+        </div>
+      </fieldset>
+    </div>
   </div>
-  Тип шаблона:
-  <select class="form-control" name="template_type">
-    <option>EMAIL</option>
-    <option>SMS</option>
-  </select>
-  Содержание шаблона:<br>
+  
+  Содержание шаблона:
   <textarea class="form-control" name="template_attributes" rows="4"></textarea><br><br>
+  <!-- начало описания дополнительных параметров -->
+  <p>
+    Для добавления дополнительных параметров в шаблонах, нужно параметр взять в двойные фигурные скобки - {{параметр}}<br />
+    <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5 class="panel-title">
+            <a data-toggle="collapse" href="#collapse1">Подробнее о дополнительных параметрах</a>
+          </h5>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p>
+              Для добавления дополнительных параметров в текст, нужно их записывать в формате - {{parameter}}. При обработке текста шаблона шаблонизатором, параметры в двойных фигурных скобках будут интерпретироваться как переменные. То есть если придет запрос на создание текста из шаблона, шаблонизатор подставит нужное значение вместо {{parameter}}.
+            </p>
+            <p>
+              Пример текста шаблона и результат обработки шаблонизатором: <br />
+              текст: “OpenWallet. Код подтверждения - {{code}}. Никому не сообщайте этот код." <br />
+              полученные доп. параметры: “code”: “1234”
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p>
+
+  <div>
+    <p>Пример:
+    <pre>
+      Привет {{name}}, это твой новый тестовый код {{code}}
+    </pre>
+  </div>
+  <!-- конец описания дополнительных параметров -->
+
   <button type="submit" class="btn btn-default">Сохранить</button>
 </form>
 
 <a href="/admin/index" class="btn btn-default">cancel</a>
-
-<div>
-  <p>Body example:</p>
-  <pre>
-    "Привет {{name}}, это твой новый тестовый код {{code}}"
-  </pre>
-</div>
