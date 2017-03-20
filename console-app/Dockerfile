@@ -5,6 +5,7 @@ RUN apk upgrade
 RUN apk add curl wget bash
 
 RUN mkdir /app
+RUN touch /var/tmp/file
 
 WORKDIR /app
 
