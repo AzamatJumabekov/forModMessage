@@ -13,7 +13,8 @@ class App
       puts "> Enter params".cyan
       while line = Readline.readline('> '.cyan, true)
           request = Sender.new
-          request.send(line)
+          response = request.send(line)
+          puts response.body
       end
     end
   end

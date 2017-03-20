@@ -22,7 +22,6 @@ class Sender
     http = Net::HTTP.new(uri.host, uri.port)
     response = http.request(request)
     show_wait_cursor(1)
-    puts response.body
     return response
   end
 end
