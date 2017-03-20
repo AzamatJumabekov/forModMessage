@@ -21,6 +21,8 @@ class AdminTemplate
 
   def edit
     file = File.read('./assets/templates/' + @params['template'])
+    hash = JSON.parse(file)
+    return hash['message']
   end
 
   def create
@@ -29,7 +31,12 @@ class AdminTemplate
 
   private
   def write_to_file
-    File.open("./assets/templates/" + file_name, "w+") { |file| file.write(@params['template_attributes']) }
+    File.open("./assets/templates/" + file_name, "w+") { |file| file.write(make_json) }
+  end
+
+  def make_json
+    text = {"message": "#{@params['template_attributes']}"}
+    json = JSON.pretty_generate(text)
   end
 
   def file_name

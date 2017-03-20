@@ -48,7 +48,7 @@ class Admin < Rack::App
 
   get '/edit/:template' do
     file = AdminTemplate.new(params)
-    @file = file.show
+    @file = file.edit
     @file_name = params['template']
     render 'edit.html.erb'
   end

@@ -32,7 +32,9 @@ class App < Rack::App
       hash = JSON.parse(payload)
     end
     message = Message.new(hash)
-    message.generate_message
+    if message.generate_message
+      response.status = 201
+    end
   end
 
 end
