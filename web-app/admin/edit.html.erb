@@ -1,7 +1,8 @@
 <h1>Редактирование шаблона</h1>
-<form action="/admin/create" method="post" accept-charset="UTF-8">
+<form action="/admin/update" method="post" accept-charset="UTF-8">
   Наименование шаблона:
   <input type="text" class="form-control" name="name" value="<%= @file_name.split('_')[1] %>" required="required">
+  <input type="hidden" name="old_name" value="<%= @file_name %>">
   <div class="container">
     <div class="col-xs-3">
       Язык:

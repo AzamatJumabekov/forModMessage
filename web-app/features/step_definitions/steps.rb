@@ -12,12 +12,12 @@ When(/^Я нажимаю на "([^"]*)"$/) do |arg|
   click_link(arg)
 end
 
-When(/^выбираю язык "([^"]*)"$/) do |radio|
-  choose(radio)
+When(/^выбираю язык "([^"]*)"$/) do |lang|
+  choose(lang)
 end
 
-When(/^выбираю тип шаблона "([^"]*)"$/) do |arg1|
-  select('SMS', from: 'template_type')
+When(/^выбираю тип шаблона "([^"]*)"$/) do |type|
+  choose(type)
 end
 
 When(/^Я заполняю поле "([^"]*)" текстом "([^"]*)"$/) do |field, value|
@@ -35,7 +35,7 @@ When(/^Я перехожу по xpath по названию "([^"]*)" на "([^"
   sleep 2
 end
 
-When(/^Я не вижу "([^"]*)"$/) do |arg|
+Then(/^Я не вижу "([^"]*)"$/) do |arg|
   page.should have_no_content(arg)
 end
 
