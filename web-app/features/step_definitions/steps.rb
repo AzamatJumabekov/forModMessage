@@ -43,3 +43,7 @@ When(/^Я нажимаю на подтверждения удаления$/) do
   page.driver.browser.switch_to.alert.accept
   sleep(0.5)
 end
+
+When(/^Я делаю скрол вниз$/) do
+  page.execute_script "window.scrollBy(0,10000)"
+end
