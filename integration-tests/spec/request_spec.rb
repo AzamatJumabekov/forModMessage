@@ -4,7 +4,7 @@ require 'pry'
 
 RSpec.describe Sender do
   it 'should return rendered text from template' do
-   params = {"template": "SMSOTP_kz", "to": "+95745732234", "params": {"code": "4353"}}
+   params = {"template": "SMS_OTP_KZ", "to": "+95745732234", "params": {"code": "4353"}}
    json = JSON.generate(params)
    request = Sender.new
    a = request.send(json)
@@ -12,7 +12,7 @@ RSpec.describe Sender do
  end
 
   it 'should return missing params' do
-   params = {"template": "SMSOTP_kz", "to": "+95745732234"}
+   params = {"template": "SMS_OTP_KZ", "to": "+95745732234"}
    json = JSON.generate(params)
    request = Sender.new
    a = request.send(json)

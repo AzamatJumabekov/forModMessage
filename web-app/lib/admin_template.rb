@@ -1,26 +1,36 @@
+TEMPLATES_PATH = ENV['RACK_ENV'] == 'test' ? './features/templates/' : './assets/templates/'
+
 class AdminTemplate
   
   def initialize(params)
     @params = params
   end
 
+  def self.get_path
+    TEMPLATES_PATH
+  end
+
+  def self.templates_list
+    Dir[ TEMPLATES_PATH + '*' ].select{ |f| File.file? f }.map{ |f| File.basename f }
+  end
+
   def show
-    file = File.read('./assets/templates/' + @params['template'])
+    file = File.read(TEMPLATES_PATH + @params['template'])
   end
 
   def delete
-    File.delete("./assets/templates/" + @params)
+    File.delete(TEMPLATES_PATH + @params)
   end
 
   def update
     if @params['old_name'] != @params['name'] || @params['template_type'] != @params['old_name'].split('_')[0]
-      File.rename("./assets/templates/" + @params['old_name'], "./assets/templates/" + file_name)
+      File.rename(TEMPLATES_PATH + @params['old_name'], TEMPLATES_PATH + file_name)
     end
     write_to_file
   end
 
   def edit
-    file = File.read('./assets/templates/' + @params['template'])
+    file = File.read(TEMPLATES_PATH + @params['template'])
     hash = JSON.parse(file)
     return hash['message']
   end
@@ -35,7 +45,7 @@ class AdminTemplate
 
   private
   def write_to_file
-    File.open("./assets/templates/" + file_name, "w+") { |file| file.write(make_json) }
+    File.open(TEMPLATES_PATH + file_name, "w+") { |file| file.write(make_json) }
   end
 
   def make_json

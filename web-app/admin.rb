@@ -25,7 +25,7 @@ class Admin < Rack::App
   end
 
   get '/index' do
-    @templates = Dir[ './assets/templates/*' ].select{ |f| File.file? f }.map{ |f| File.basename f }
+    @templates = AdminTemplate.templates_list
     render 'index.html.erb'
   end
 
