@@ -29,6 +29,10 @@ class AdminTemplate
     write_to_file
   end
 
+  def get_file_name
+    file_name
+  end
+
   private
   def write_to_file
     File.open("./assets/templates/" + file_name, "w+") { |file| file.write(make_json) }

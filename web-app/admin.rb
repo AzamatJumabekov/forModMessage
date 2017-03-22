@@ -35,8 +35,11 @@ class Admin < Rack::App
 
   post '/create' do
     new_template = AdminTemplate.new(payload)
-    new_template.create
-    redirect_to '/admin/index'
+    if new_template.create
+      redirect_to 'show/' + new_template.get_file_name
+    else
+      redirect_to 'admin/index'
+    end
   end
 
   get '/show/:template' do
