@@ -1,7 +1,7 @@
 <h1>Редактирование шаблона</h1>
 <form action="/admin/create" method="post" accept-charset="UTF-8">
   Наименование шаблона:
-  <input type="text" class="form-control" name="name" value="">
+  <input type="text" class="form-control" name="name" value="<%= @file_name.split('_')[1] %>" required="required">
   <div class="container">
     <div class="col-xs-3">
       Язык:
@@ -40,7 +40,7 @@
   </div>
   
   Содержание шаблона:
-  <textarea class="form-control" name="template_attributes" rows="4"></textarea><br><br>
+  <textarea class="form-control" name="template_attributes" rows="4" required="required"><%= @file %></textarea>
   <!-- начало описания дополнительных параметров -->
   <p>
     Для добавления дополнительных параметров в шаблонах, нужно параметр взять в двойные фигурные скобки - {{параметр}}<br />
