@@ -58,8 +58,11 @@ class Admin < Rack::App
 
   post '/update' do
     edited_file = AdminTemplate.new(payload)
-    edited_file.update
-    redirect_to '/admin/index'
+    if edited_file.update
+      redirect_to 'show/' + edited_file.get_file_name
+    else
+      redirect_to 'admin/index'
+    end
   end
 
 end
