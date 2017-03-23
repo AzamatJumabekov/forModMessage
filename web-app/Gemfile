@@ -1,21 +1,22 @@
 # frozen_string_literal: true
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem 'rack-app'
-gem 'puma'
-gem 'rack-app-front_end'
 gem 'liquid', '~> 4.0'
+gem 'puma'
+gem 'rack-app'
+gem 'rack-app-front_end'
 
 group :development do
   gem 'pry-byebug'
+  gem 'rubocop'
   gem 'shotgun'
 end
 
 group :test do
-  gem 'rack-test'
   gem 'capybara'
-  gem 'rspec'
-  gem 'selenium-webdriver'
-  gem 'selenium-cucumber'
   gem 'cucumber'
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'selenium-cucumber'
+  gem 'selenium-webdriver'
 end
