@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require_relative 'sender'
 
+# This class starts console app
 class App
   TEMPLATES = Dir['../templates/*'].select { |f| File.file? f }.map { |f| File.basename f }
   LIST = %w(template to params).push(*TEMPLATES).sort
@@ -19,7 +20,7 @@ class App
           puts 'Parameters must be passed as ruby Hash'
         else
           request = Sender.new
-          response = request.send(line)
+          response = request.send_request(line)
           puts response.body
         end
       end

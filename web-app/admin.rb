@@ -1,8 +1,8 @@
+# This is controller and routes for admin pages
 class Admin < Rack::App
-
   apply_extensions :front_end
 
-  layout "layout.html.erb"
+  layout 'layout.html.erb'
 
   serve_files_from '/www'
 
@@ -16,7 +16,7 @@ class Admin < Rack::App
     file = AdminTemplate.new(payload)
     file.write_to_file
     'ok'
-  end 
+  end
 
   post '/delete' do
     template = AdminTemplate.new(payload['filename'])
@@ -36,7 +36,7 @@ class Admin < Rack::App
   post '/create' do
     new_template = AdminTemplate.new(payload)
     if new_template.create
-      redirect_to 'show/' + new_template.get_file_name
+      redirect_to 'show/' + new_template.give_file_name
     else
       redirect_to 'admin/index'
     end
@@ -64,5 +64,4 @@ class Admin < Rack::App
       redirect_to 'admin/index'
     end
   end
-
 end

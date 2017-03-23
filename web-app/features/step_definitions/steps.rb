@@ -21,13 +21,12 @@ When(/^выбираю тип шаблона "([^"]*)"$/) do |type|
 end
 
 When(/^Я заполняю поле "([^"]*)" текстом "([^"]*)"$/) do |field, value|
-  fill_in field, with:value
+  fill_in field, with: value
 end
 
 When(/^Я нажимаю на кнопку "([^"]*)"$/) do |arg|
   click_on(arg)
 end
-
 
 When(/^Я перехожу по xpath по названию "([^"]*)" на "([^"]*)"$/) do |arg, link|
   sleep 2
@@ -45,5 +44,5 @@ When(/^Я нажимаю на подтверждения удаления$/) do
 end
 
 When(/^Я делаю скрол вниз$/) do
-  page.execute_script "window.scrollBy(0,10000)"
+  page.execute_script 'window.scrollBy(0,10000)'
 end

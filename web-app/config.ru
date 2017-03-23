@@ -6,7 +6,6 @@ require 'rack/static'
 
 require_relative 'lib/admin_template'
 require_relative 'lib/message'
-require_relative 'hash'
 require_relative 'app'
 require_relative 'admin'
 

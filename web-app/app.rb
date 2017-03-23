@@ -1,5 +1,5 @@
+# This is a controller and routes for api
 class App < Rack::App
-
   apply_extensions :front_end
 
   serializer do |obj|
@@ -23,10 +23,10 @@ class App < Rack::App
   desc 'handles requests for creating messages'
 
   post '/generate' do
-    if payload.nil?
-      raise StandardError.new("nil params")
-    end
-    if payload.is_a?(Hash)
+    case payload
+    when nil
+      raise StandardError, 'nil params'
+    when Hash
       hash = payload
     else
       hash = JSON.parse(payload)
@@ -36,5 +36,4 @@ class App < Rack::App
       response.status = 201
     end
   end
-
 end
