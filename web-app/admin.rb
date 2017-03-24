@@ -1,4 +1,4 @@
-# This is controller and routes for admin pages
+# This is a controller and routes for admin pages
 class Admin < Rack::App
   apply_extensions :front_end
 
@@ -59,7 +59,7 @@ class Admin < Rack::App
   post '/update' do
     edited_file = AdminTemplate.new(payload)
     if edited_file.update
-      redirect_to 'show/' + edited_file.get_file_name
+      redirect_to 'show/' + edited_file.give_file_name
     else
       redirect_to 'admin/index'
     end

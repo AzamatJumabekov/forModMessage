@@ -8,7 +8,7 @@ class App
 
   def self.run
     complete = proc { |s| LIST.grep(/^#{Regexp.escape(s)}/) }
-    Readline.completion_append_character = ''
+    Readline.completion_append_character = ' '
     Readline.completion_proc = complete
       loop do
         puts '> Enter params'.cyan
