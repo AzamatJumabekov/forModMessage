@@ -1,3 +1,6 @@
+require 'dotenv'
+Dotenv.load('.env')
+
 require 'rack/app'
 require 'pry'
 require 'liquid'

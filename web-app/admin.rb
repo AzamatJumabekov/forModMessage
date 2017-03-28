@@ -12,12 +12,6 @@ class Admin < Rack::App
     end
   end
 
-  post '/admin' do
-    file = AdminTemplate.new(payload)
-    file.write_to_file
-    'ok'
-  end
-
   post '/delete' do
     template = AdminTemplate.new(payload['filename'])
     template.delete

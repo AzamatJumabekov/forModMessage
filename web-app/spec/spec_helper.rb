@@ -1,8 +1,10 @@
+require 'dotenv'
+Dotenv.load('.env.rspec')
 require 'liquid'
 require 'pry'
 require 'json'
 require 'message'
-ENV['RACK_ENV'] = 'test'
+require 'admin_template'
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
