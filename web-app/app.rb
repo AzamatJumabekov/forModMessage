@@ -23,14 +23,7 @@ class App < Rack::App
   desc 'handles requests for creating messages'
 
   post '/generate' do
-    case payload
-    when nil
-      raise StandardError, 'nil params'
-    when Hash
-      hash = payload
-    else
-      hash = JSON.parse(payload)
-    end
+    hash = Validate.params(payload)
     message = Message.new(hash)
     response.status = 201 if message.generate_message
   end

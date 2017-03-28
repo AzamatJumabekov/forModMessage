@@ -4,8 +4,7 @@ require 'liquid'
 require 'rack/app/front_end'
 require 'rack/static'
 
-require_relative 'lib/admin_template'
-require_relative 'lib/message'
+Dir["#{File.dirname(__FILE__)}/lib/**/*.rb"].each { |file| require file }
 require_relative 'app'
 require_relative 'admin'
 
