@@ -43,7 +43,7 @@ class Message
   end
 
   def read_file(filename)
-    path = File.expand_path('../../assets/templates/', __FILE__)
+    path = File.expand_path('../../' + ENV['TEMPLATES_PATH'], __FILE__)
     JSON.parse(File.read(File.join(path, filename)))
   end
 

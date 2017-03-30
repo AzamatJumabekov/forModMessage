@@ -1,6 +1,8 @@
 require 'dotenv'
 Dotenv.load('.env.rspec')
 require 'liquid'
+require 'exceptions/liquid_template_missing'
+require 'exceptions/attributes_missing'
 require 'pry'
 require 'json'
 require 'message'

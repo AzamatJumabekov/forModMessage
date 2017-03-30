@@ -15,7 +15,7 @@ RSpec.describe AdminTemplate do
 
   it 'Достает шаблоны из папки ./rspec/templates/, метод templates_list' do
     @templates = AdminTemplate.templates_list
-    expect(@templates).to eq(["SMS_OTP_RU", "SMS_OTP_EN"])
+    expect(@templates).to eq(["EMAIL_OTP_RU", "SMS_OTP_RU", "SMS_OTP_EN"])
   end
 
   it 'Просматривает содержимое шаблона SMS_OTP_RU, метод show' do
@@ -26,14 +26,14 @@ RSpec.describe AdminTemplate do
   it 'Удаляет шаблон SMS_OTP_RU, метод delete' do
     template = AdminTemplate.new(params_ru['template'])
     template.delete
-    expect(AdminTemplate.templates_list).to eq(["SMS_OTP_EN"])
+    expect(AdminTemplate.templates_list).to eq(["EMAIL_OTP_RU", "SMS_OTP_EN"])
   end
 
   it 'Сохраняет изменения шаблона(название шаблона с SMS_OTP_RU на SMS_OTP_KZ), метод update' do
     payload_kz.store("old_name", "SMS_OTP_RU")
     edited_file = AdminTemplate.new(payload_kz)
     edited_file.update
-    expect(AdminTemplate.templates_list).to eq(["SMS_OTP_KZ", "SMS_OTP_EN"])
+    expect(AdminTemplate.templates_list).to eq(["EMAIL_OTP_RU", "SMS_OTP_KZ", "SMS_OTP_EN"])
   end
 
   it 'Сохраняет изменение содержимого шаблона, метод update' do
