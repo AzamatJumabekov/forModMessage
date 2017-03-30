@@ -1,10 +1,5 @@
 RSpec.describe Message do
   
-  before(:each) do
-    FileUtils.rm_r Dir.glob('spec/templates/*')
-    FileUtils.cp_r 'spec/templates_for_test/.', 'spec/templates/.'
-  end
-
   payload = {
     'template' => 'SMS_OTP_RU',
     'to' => '+95745732234',

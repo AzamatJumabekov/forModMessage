@@ -8,11 +8,6 @@ RSpec.describe AdminTemplate do
                 "template_attributes"=>"OpenWallet. Код подтверждения - {{code}}. Никому не сообщайте этот код."
   }
 
-  before(:each) do
-    FileUtils.rm_r Dir.glob('spec/templates/*')
-    FileUtils.cp_r 'spec/templates_for_test/.', 'spec/templates/.'
-  end
-
   it 'Достает шаблоны из папки ./rspec/templates/, метод templates_list' do
     @templates = AdminTemplate.templates_list.sort
     expect(@templates).to eq(["EMAIL_OTP_RU", "SMS_OTP_RU", "SMS_OTP_EN"].sort)
