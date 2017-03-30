@@ -13,7 +13,6 @@ class Message
 
   def generate_message
     message = {}
-
     if payload['template'].include? 'SMS'
       message.merge!(sms_message)
     elsif payload['template'].include? 'EMAIL'
@@ -28,8 +27,9 @@ class Message
 
   def parse_template(text)
     template = Liquid::Template.parse(text)
-    template.render(payload['params'], strict_variables: true)
+    rendered_text = template.render(payload['params'], strict_variables: true)
     raise LiquidTemplateMissing, template.errors if template.errors.any?
+    return rendered_text
   end
 
   def check_params(params)

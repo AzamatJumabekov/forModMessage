@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'dotenv'
 gem 'liquid', '~> 4.0'
 gem 'puma'
 gem 'rack-app'
 gem 'rack-app-front_end'
-gem 'dotenv'
 
 group :development do
   gem 'pry-byebug'
