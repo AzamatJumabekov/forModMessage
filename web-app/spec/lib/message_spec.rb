@@ -28,7 +28,6 @@ RSpec.describe Message do
     payload['template'] = 'EMAIL_OTP_RU'
     payload.store('subject', 'Secret code')
     payload['to'] = 'lakiwolf.90@mail.ru'
-    binding.pry
     message = Message.new(payload)
     File.truncate('messages.json', 0)
     message.generate_message
